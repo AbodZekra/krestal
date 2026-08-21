@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>عيادة كريستال السنية التجميلية</title>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        /* ============================================================
+           CSS Variables & Themes (نفس الكود السابق - تم اختصاره للتوفير)
+           ============================================================ */
+        :root {
+            --bg-primary: #fdf2f8;
+            --bg-secondary: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.3);
+            --bg-glass-hover: rgba(255, 255, 255, 0.5);
+            --text-primary: #1a0e1a;
+            --text-secondary: #6b4c6a;
+            --text-muted: #a07c9e;
+            --accent: #e84393;
+            --accent-light: #fd79a8;
+            --accent-dark: #c2186b;
+            --border-glass: rgba(232, 67, 147, 0.15);
+            --shadow-glass: 0 8px 32px rgba(232, 67, 147, 0.1);
+            --gradient-header: linear-gradient(135deg, #f8bbd0, #fce4ec);
+            --blur-bg: rgba(255, 255, 255, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="night"] {
+            --bg-primary: #0d0a0d;
+            --bg-secondary: #1a0e1a;
+            --bg-glass: rgba(45, 27, 46, 0.4);
+            --bg-glass-hover: rgba(45, 27, 46, 0.6);
+            --text-primary: #f5e6f0;
+            --text-secondary: #c9a8c5;
+            --text-muted: #8a6f88;
+            --accent: #b33771;
+            --accent-light: #d65a96;
+            --accent-dark: #8a2a5a;
+            --border-glass: rgba(179, 55, 113, 0.2);
+            --shadow-glass: 0 8px 32px rgba(179, 55, 113, 0.15);
+            --gradient-header: linear-gradient(135deg, #2d1b2e, #1a0e1a);
+            --blur-bg: rgba(26, 14, 26, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.05);
+        }
+
+        /* ============================================================
+           Reset & Base (نفس الكود السابق)
+           ============================================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: all 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        /* ============================================================
+           Glass Morphism
+           ============================================================ */
+        .glass {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            box-shadow: var(--shadow-glass);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass:hover {
+            transform: translateY(-2px);
+            background: var(--bg-glass-hover);
+        }
+
+        /* ============================================================
+           App Container
+           ============================================================ */
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 16px;
+            padding-bottom: 100px;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ============================================================
+           Header (نفس الكود السابق)
+           ============================================================ */
+        .header-section {
+            text-align: center;
+            padding: 30px 20px 24px;
+            background: var(--gradient-header);
+            border-radius: 32px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            animation: slideDown 0.6s ease;
+        }
+        .header-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 0;
+        }
+        .header-section>* { position: relative; z-index: 1; }
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 14px;
+            border-radius: 50%;
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(232, 67, 147, 0.15);
+            transition: all 0.4s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        .logo-container img { width: 100%; height: 100%; object-fit: cover; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        .header-title { font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.5px; }
+        .header-sub { font-size: 14px; color: var(--text-secondary); margin-top: 4px; font-weight: 300; }
+
+        /* ============================================================
+           Day Selector
+           ============================================================ */
+        .day-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            animation: slideDown 0.7s ease;
+        }
+        .day-btn {
+            flex: 1;
+            padding: 16px 8px;
+            border: none;
+            border-radius: 20px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+            text-align: center;
+            box-shadow: var(--shadow-glass);
+            position: relative;
+            overflow: hidden;
+        }
+        .day-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            opacity: 0;
+            transition: all 0.4s ease;
+            border-radius: 20px;
+        }
+        .day-btn .day-name {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+        .day-btn .day-date {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        .day-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            box-shadow: 0 4px 24px rgba(232, 67, 147, 0.35);
+            transform: scale(1.02);
+        }
+        .day-btn.active .day-name { color: white; }
+        .day-btn.active .day-date { color: rgba(255, 255, 255, 0.8); }
+        .day-btn:hover:not(.active) { transform: translateY(-3px); background: var(--bg-glass-hover); }
+
+        /* ============================================================
+           Slots List
+           ============================================================ */
+        .slots-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+            min-height: 200px;
+            animation: slideDown 0.8s ease;
+        }
+        .slot-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 22px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: var(--shadow-glass);
+            animation: fadeInUp 0.5s ease backwards;
+        }
+        .slot-item:nth-child(1) { animation-delay: 0.05s; }
+        .slot-item:nth-child(2) { animation-delay: 0.10s; }
+        .slot-item:nth-child(3) { animation-delay: 0.15s; }
+        .slot-item:nth-child(4) { animation-delay: 0.20s; }
+        .slot-item:nth-child(5) { animation-delay: 0.25s; }
+        .slot-item:nth-child(6) { animation-delay: 0.30s; }
+        .slot-item:nth-child(7) { animation-delay: 0.35s; }
+        .slot-item:nth-child(8) { animation-delay: 0.40s; }
+        .slot-item:nth-child(9) { animation-delay: 0.45s; }
+        .slot-item:nth-child(10) { animation-delay: 0.50s; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slot-item:hover:not(.booked) { transform: translateX(-6px) scale(1.01); background: var(--bg-glass-hover); }
+        .slot-item.booked { opacity: 0.5; cursor: not-allowed; }
+        .slot-item .slot-time { font-size: 20px; font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+        .slot-item .slot-status {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        .slot-item .slot-status.available {
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            animation: glow 2s ease-in-out infinite;
+        }
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(232, 67, 147, 0.1); } 50% { box-shadow: 0 0 40px rgba(232, 67, 147, 0.2); } }
+        .slot-item .slot-status.booked { color: var(--text-muted); border: 1px solid var(--text-muted); }
+        .slot-loading { text-align: center; padding: 50px 0; color: var(--text-muted); }
+        .slot-loading .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-glass);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 14px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ============================================================
+           Booking Modal, Appointment Screen, Toast, Bottom Nav, Confirm Dialog
+           (نفس الكود السابق - تم اختصاره للتوفير)
+           ============================================================ */
+        /* ... باقي الـ CSS كما هو في الكود الأصلي ... */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); align-items: center; justify-content: center; z-index: 1000; padding: 20px; animation: fadeIn 0.4s ease; }
+        .modal-overlay.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        .modal-content { background: var(--bg-glass); backdrop-filter: blur(48px); -webkit-backdrop-filter: blur(48px); border: 1px solid var(--glass-border); border-radius: 32px; padding: 36px 28px; max-width: 400px; width: 100%; box-shadow: 0 32px 80px rgba(0,0,0,0.2); animation: modalPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        @keyframes modalPop { from { opacity: 0; transform: scale(0.8) translateY(30px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .modal-content .modal-title { font-size: 26px; font-weight: 700; color: var(--text-primary); text-align: center; margin-bottom: 4px; }
+        .modal-content .modal-sub { text-align: center; color: var(--text-secondary); font-size: 15px; margin-bottom: 24px; }
+        .modal-content .form-group { margin-bottom: 16px; }
+        .modal-content .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+        .modal-content .form-group input { width: 100%; padding: 14px 18px; border: none; border-radius: 16px; background: var(--blur-bg); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid var(--border-glass); font-size: 15px; color: var(--text-primary); transition: all 0.3s ease; font-family: inherit; }
+        .modal-content .form-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(232, 67, 147, 0.12); }
+        .modal-content .form-group input::placeholder { color: var(--text-muted); }
+        .modal-content .form-group input.error { border-color: #e74c3c; box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.12); }
+        .modal-actions { display: flex; gap: 12px; margin-top: 24px; }
+        .modal-actions .btn { flex: 1; padding: 14px; border: none; border-radius: 16px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+        .btn-cancel { background: var(--bg-glass); color: var(--text-secondary); border: 1px solid var(--border-glass); }
+        .btn-cancel:hover { background: var(--bg-glass-hover); transform: scale(1.02); }
+        .btn-confirm { background: var(--accent); color: white; border: 1px solid var(--accent); box-shadow: 0 4px 20px rgba(232, 67, 147, 0.3); }
+        .btn-confirm:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 32px rgba(232, 67, 147, 0.4); }
+
+        .appointment-screen { display: none; flex-direction: column; position: fixed; inset: 0; background: var(--bg-primary); z-index: 100; padding: 20px; animation: fadeIn 0.6s ease; overflow-y: auto; }
+        .appointment-screen.active { display: flex; }
+        /* ... باقي الـ CSS كما هو ... */
+
+        .toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 2000; width: 90%; max-width: 420px; pointer-events: none; }
+        .toast { padding: 18px 28px; border-radius: 20px; background: var(--bg-glass); backdrop-filter: blur(48px); -webkit-backdrop-filter: blur(48px); border: 1px solid var(--glass-border); box-shadow: 0 16px 60px rgba(0,0,0,0.15); text-align: center; font-weight: 600; font-size: 15px; color: var(--text-primary); margin-bottom: 10px; animation: toastSlide 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: auto; }
+        @keyframes toastSlide { from { opacity: 0; transform: translateY(-40px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .toast.success { border-color: #2ecc71; }
+        .toast.error { border-color: #e74c3c; }
+        .toast.info { border-color: var(--accent); }
+        .toast.warning { border-color: #f39c12; }
+
+        .bottom-nav { position: fixed; bottom: 20px; left: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 500; animation: slideUp 0.6s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .nav-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--border-glass); background: var(--bg-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: var(--text-muted); font-size: 18px; cursor: pointer; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-glass); position: relative; }
+        .nav-btn:hover { transform: scale(1.12); color: var(--accent); background: var(--bg-glass-hover); }
+        .nav-btn.active { color: var(--accent); background: var(--bg-glass-hover); box-shadow: 0 0 30px rgba(232, 67, 147, 0.15); }
+        .nav-btn .badge-dot { position: absolute; top: 4px; right: 4px; width: 10px; height: 10px; background: #2ecc71; border-radius: 50%; border: 2px solid var(--bg-secondary); display: none; }
+        .nav-btn .badge-dot.show { display: block; animation: pulse 1.5s infinite; }
+        .nav-btn .tooltip { position: absolute; right: 56px; background: var(--bg-glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-glass); padding: 4px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; color: var(--text-primary); white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.3s ease; }
+        .nav-btn:hover .tooltip { opacity: 1; transform: translateX(-4px); }
+
+        .confirm-dialog { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); align-items: center; justify-content: center; z-index: 3000; padding: 20px; animation: fadeIn 0.3s ease; }
+        .confirm-dialog.active { display: flex; }
+        .confirm-dialog .dialog-box { background: var(--bg-glass); backdrop-filter: blur(48px); -webkit-backdrop-filter: blur(48px); border: 1px solid var(--glass-border); border-radius: 32px; padding: 32px 28px; max-width: 380px; width: 100%; text-align: center; animation: modalPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .confirm-dialog .dialog-icon { font-size: 48px; display: block; margin-bottom: 12px; }
+        .confirm-dialog .dialog-title { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+        .confirm-dialog .dialog-message { font-size: 15px; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6; }
+        .confirm-dialog .dialog-actions { display: flex; gap: 12px; }
+        .confirm-dialog .dialog-actions .btn { flex: 1; padding: 14px; border: none; border-radius: 16px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+        .confirm-dialog .dialog-actions .btn-dialog-cancel { background: var(--bg-glass); color: var(--text-secondary); border: 1px solid var(--border-glass); }
+        .confirm-dialog .dialog-actions .btn-dialog-cancel:hover { background: var(--bg-glass-hover); }
+        .confirm-dialog .dialog-actions .btn-dialog-confirm { background: #e74c3c; color: white; border: 1px solid #e74c3c; }
+        .confirm-dialog .dialog-actions .btn-dialog-confirm:hover { transform: scale(1.02); box-shadow: 0 4px 20px rgba(231, 76, 60, 0.3); }
+
+        @media (max-width: 480px) {
+            .app-container { padding: 12px; padding-bottom: 90px; }
+            .header-title { font-size: 20px; }
+            .logo-container { width: 80px; height: 80px; }
+            .day-btn { padding: 12px 6px; }
+            .day-btn .day-name { font-size: 14px; }
+            .slot-item { padding: 14px 18px; }
+            .slot-item .slot-time { font-size: 17px; }
+            .counter-display-full { font-size: 44px; padding: 16px; }
+            .modal-content { padding: 28px 20px; }
+            .bottom-nav { left: 12px; bottom: 16px; }
+            .nav-btn { width: 42px; height: 42px; font-size: 16px; }
+        }
+        @media (max-width: 360px) {
+            .day-selector { gap: 6px; }
+            .day-btn { font-size: 11px; padding: 10px 4px; }
+            .day-btn .day-name { font-size: 12px; }
+            .counter-display-full { font-size: 34px; letter-spacing: 3px; }
+            .slot-item .slot-time { font-size: 15px; }
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 20px; }
+
+        /* ============================================================
+   APPOINTMENT SCREEN - تصميم محسن مع خلفية
+   ============================================================ */
+
+/* خلفية الشاشة بالكامل */
+.appointment-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    background: var(--bg-primary);
+    overflow-y: auto;
+    padding: 0;
+}
+
+.appointment-screen.active {
+    display: flex;
+}
+
+/* طبقة الخلفية مع الصورة وتأثير البلور */
+.appointment-bg-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.appointment-bg-image {
+    position: absolute;
+    inset: -20px; /* لتوسيع الصورة قليلاً لمنع ظهور الحواف */
+    background: url('pack.png') center center / cover no-repeat;
+    filter: blur(2px) brightness(0.6);
+    transform: scale(1.05);
+    transition: filter 0.5s ease;
+}
+
+/* طبقة شفافة إضافية لتحسين وضوح النص */
+.appointment-bg-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+/* محتوى الشاشة (فوق الخلفية) */
+.appointment-content {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px 30px;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+/* ============================================================
+   HEADER مع أيقونة متحركة
+   ============================================================ */
+
+.appointment-header-full {
+    text-align: center;
+    padding: 20px 20px 24px;
+    margin-top: 10px;
+}
+
+.icon-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 16px;
+}
+
+.icon-wrapper .icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    z-index: 2;
+    animation: float 3s ease-in-out infinite;
+}
+
+.icon-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 3px solid rgba(46, 204, 113, 0.3);
+    animation: ringPulse 2s ease-in-out infinite;
+}
+
+.icon-ring::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    border: 2px solid rgba(46, 204, 113, 0.15);
+    animation: ringPulse 2s ease-in-out infinite 0.5s;
+}
+
+@keyframes ringPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 0.4;
+    }
+}
+
+.appointment-header-full .title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+}
+
+.appointment-header-full .sub {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 4px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+   COUNTER DISPLAY - محسن
+   ============================================================ */
+
+.counter-box-full {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    max-width: 440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.counter-display-full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+}
+
+.counter-display-full .counter-icon {
+    font-size: 32px;
+    opacity: 0.8;
+}
+
+.counter-display-full .counter-time {
+    font-size: 48px;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    font-variant-numeric: tabular-nums;
+    transition: color 0.5s ease;
+}
+
+.counter-display-full.urgent .counter-time {
+    color: #ff6b6b;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* ============================================================
+   PROGRESS BAR - محسن
+   ============================================================ */
+
+.progress-container-full {
+    width: 100%;
+    position: relative;
+}
+
+.progress-container-full {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill-full {
+    height: 12px;
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    border-radius: 16px;
+    transition: width 1s linear;
+    width: 100%;
+    position: relative;
+}
+
+.progress-fill-full::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-fill-full.urgent {
+    background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    padding: 0 4px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+/* ============================================================
+   DETAILS CARDS - محسنة
+   ============================================================ */
+
+.counter-details-full {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.counter-detail-full {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 18px;
+    padding: 16px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.counter-detail-full:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.counter-detail-full .label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    display: block;
+    letter-spacing: 0.5px;
+}
+
+.counter-detail-full .value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    display: block;
+    margin-top: 4px;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================
+   CANCEL BUTTON - مع أنيميشن رائع
+   ============================================================ */
+
+.btn-cancel-full {
+    position: relative;
+    overflow: hidden;
+    padding: 18px 28px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    color: #ff6b6b;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+}
+
+.btn-cancel-full .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: transform 0.4s ease;
+}
+
+.btn-cancel-full .btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+/* تأثير التموج (Ripple Effect) */
+.btn-cancel-full .btn-ripple {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: rgba(255, 107, 107, 0.1);
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.6s ease;
+    z-index: 0;
+}
+
+/* أنيميشن الزر عند التمرير */
+.btn-cancel-full:hover {
+    transform: translateY(-3px) scale(1.02);
+    background: rgba(255, 107, 107, 0.15);
+    border-color: rgba(255, 107, 107, 0.6);
+    box-shadow: 0 8px 35px rgba(255, 107, 107, 0.25);
+    color: #ff6b6b;
+}
+
+.btn-cancel-full:hover .btn-icon {
+    transform: rotate(15deg) scale(1.1);
+}
+
+.btn-cancel-full:hover .btn-ripple {
+    transform: scale(1.5);
+    opacity: 1;
+}
+
+/* أنيميشن الضغط */
+.btn-cancel-full:active {
+    transform: scale(0.95) !important;
+    transition-duration: 0.1s;
+}
+
+/* أنيميشن نبض مستمر للزر */
+.btn-cancel-full::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(238, 90, 36, 0.1));
+    z-index: -1;
+    animation: borderPulse 2s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.04);
+        opacity: 1;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 480px) {
+    .counter-display-full .counter-time {
+        font-size: 34px;
+        letter-spacing: 2px;
+    }
+    
+    .counter-display-full .counter-icon {
+        font-size: 24px;
+    }
+    
+    .counter-details-full {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .counter-detail-full .value {
+        font-size: 14px;
+    }
+    
+    .appointment-header-full .title {
+        font-size: 22px;
+    }
+    
+    .icon-wrapper {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .icon-wrapper .icon {
+        font-size: 36px;
+    }
+    
+    .btn-cancel-full {
+        padding: 16px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .counter-display-full .counter-time {
+        font-size: 28px;
+    }
+    
+    .counter-details-full {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    
+    .counter-detail-full {
+        padding: 12px 10px;
+    }
+    
+    .counter-detail-full .value {
+        font-size: 13px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================================
+    TOAST CONTAINER
+    ========================================================== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ==========================================================
+    CONFIRM DIALOG
+    ========================================================== -->
+    <div class="confirm-dialog" id="confirmDialog">
+        <div class="dialog-box">
+            <span class="dialog-icon">⚠️</span>
+            <div class="dialog-title" id="dialogTitle">تأكيد الإلغاء</div>
+            <div class="dialog-message" id="dialogMessage">هل أنت متأكد من إلغاء هذا الموعد؟</div>
+            <div class="dialog-actions">
+                <button class="btn btn-dialog-cancel" id="dialogCancelBtn">إلغاء</button>
+                <button class="btn btn-dialog-confirm" id="dialogConfirmBtn">نعم، إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+    APP CONTAINER
+    ========================================================== -->
+    <div class="app-container" id="app">
+
+        <!-- ==========================================================
+        HEADER
+        ========================================================== -->
+        <header class="header-section">
+            <div class="logo-container">
+                <img src="krestal.png" alt="كريستال" />
+            </div>
+            <h1 class="header-title">عيادة كريستال السنية التجميلية</h1>
+            <p class="header-sub">✨ اهلاً وسهلاً بكم ✨</p>
+        </header>
+
+        <!-- ==========================================================
+        DAY SELECTOR
+        ========================================================== -->
+        <div class="day-selector" id="daySelector">
+            <button class="day-btn" data-day="0">
+                <span class="day-name" id="dayName0">اليوم</span>
+                <span class="day-date" id="dayDate0">--</span>
+            </button>
+            <button class="day-btn" data-day="1">
+                <span class="day-name" id="dayName1">غداً</span>
+                <span class="day-date" id="dayDate1">--</span>
+            </button>
+            <button class="day-btn" data-day="2">
+                <span class="day-name" id="dayName2">بعد غد</span>
+                <span class="day-date" id="dayDate2">--</span>
+            </button>
+        </div>
+
+        <!-- ==========================================================
+        BOOKING SCREEN
+        ========================================================== -->
+        <div id="bookingScreen">
+            <div class="slots-container" id="slotsContainer">
+                <div class="slot-loading">
+                    <div class="spinner"></div>
+                    <div>جاري تحميل المواعيد...</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==========================================================
+    APPOINTMENT SCREEN - Full Screen
+    ========================================================== -->
+<!-- ==========================================================
+APPOINTMENT SCREEN - Full Screen (نسخة محسنة)
+========================================================== -->
+<div class="appointment-screen" id="appointmentScreen">
+    <button class="back-btn" id="apptBackBtn" style="display:none;">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <!-- الخلفية مع الصورة وتأثير البلور -->
+    <div class="appointment-bg-overlay">
+        <div class="appointment-bg-image"></div>
+    </div>
+
+    <!-- المحتوى -->
+    <div class="appointment-content">
+        <div class="appointment-header-full">
+            <div class="title">موعدك محجوز</div>
+            <div class="sub">ننتظرك في العيادة</div>
+        </div>
+
+        <div class="counter-box-full">
+            <div class="counter-display-full" id="counterDisplay">
+                <span class="counter-time">00:00:00</span>
+            </div>
+            
+            <div class="progress-container-full">
+                <div class="progress-fill-full" id="progressFill" style="width:100%"></div>
+                <div class="progress-label">
+                </div>
+            </div>
+
+            <div class="counter-details-full">
+                <div class="counter-detail-full">
+                    <span class="value" id="counterDate">-</span>
+                </div>
+                <div class="counter-detail-full">
+                    <span class="value" id="counterTime">-</span>
+                </div>
+                <div class="counter-detail-full">
+                    <span class="label">المريض</span>
+                    <span class="value" id="counterPatient">-</span>
+                </div>
+                <div class="counter-detail-full">
+                    <span class="label"> واتساب</span>
+                    <span class="value" id="counterWhatsapp">-</span>
+                </div>
+            </div>
+
+            <button class="btn-cancel-full" id="cancelAppointmentBtn">
+                <span class="btn-icon"><i class="fas fa-trash-alt"></i></span>
+                <span class="btn-text">إلغاء الموعد</span>
+                <span class="btn-ripple"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+    <!-- ==========================================================
+    BOOKING MODAL
+    ========================================================== -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content">
+            <div class="modal-title">📝 حجز موعد</div>
+            <div class="modal-sub" id="modalSub">تأكيد حجز الموعد</div>
+
+            <div class="form-group">
+                <label>👤 الاسم الكامل</label>
+                <input type="text" id="patientNameInput" placeholder="أدخل اسمك الكامل" />
+            </div>
+
+            <div class="form-group">
+                <label>📱 رقم واتساب</label>
+                <input type="tel" id="whatsappInput" placeholder="مثال: 0912345678" />
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="modalCancelBtn">إلغاء</button>
+                <button class="btn btn-confirm" id="modalConfirmBtn">تأكيد الحجز</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+    BOTTOM NAVIGATION - Vertical Left
+    ========================================================== -->
+    <nav class="bottom-nav" id="bottomNav">
+        <button class="nav-btn active" id="navTheme" title="تغيير الثيم">
+            <i class="fas fa-moon"></i>
+            <span class="tooltip">تغيير الثيم</span>
+        </button>
+
+        <button class="nav-btn" id="navNotifications" title="الإشعارات">
+            <i class="fas fa-bell"></i>
+            <span class="badge-dot" id="notificationDot"></span>
+            <span class="tooltip">الإشعارات</span>
+        </button>
+
+        <button class="nav-btn" id="navInstall" title="تحميل التطبيق" style="display:none;">
+            <i class="fas fa-download"></i>
+            <span class="tooltip">تحميل التطبيق</span>
+        </button>
+    </nav>
+
+    <!-- ==========================================================
+    JAVASCRIPT - النظام الهجين (Gist + Telegram)
+    ========================================================== -->
+    <script>
+        // ============================================================
+        // 1. CONFIGURATION
+        // ============================================================
+        // --- إعدادات GitHub Gist (المصدر الرئيسي للبيانات) ---
+        const GITHUB_TOKEN = '';
+        const GIST_ID = '4948190fffffd08cf921b2530527160e';
+        const GIST_API_URL = `https://api.github.com/gists/${GIST_ID}`;
+
+        // --- إعدادات Telegram (لإرسال الإشعارات فقط) ---
+        const BOT_TOKEN = '8897871748:AAHV92-lLyKfivHVnBdQ0HK7HJeOHo43qAs';
+        const CHANNEL_ID = '-1004482903707';
+        const TG_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
+
+        const CLINIC_NAME = 'عيادة كريستال السنية التجميلية';
+        const WORK_START = 10;
+        const WORK_END = 20;
+
+        // ============================================================
+        // 2. STATE
+        // ============================================================
+        const state = {
+            selectedDay: 0,
+            selectedDate: null,
+            selectedTime: null,
+            bookedSlots: {},
+            allSlots: [],
+            appointment: null,
+            patientId: null,
+            counterInterval: null,
+            notificationSent30: false,
+            notificationSentNow: false,
+            isDark: false,
+        };
+
+        // ============================================================
+        // 3. UTILITY FUNCTIONS
+        // ============================================================
+        function getToday() {
+            return new Date().toISOString().split('T')[0];
+        }
+
+        function getDateFromDayOffset(offset) {
+            const d = new Date();
+            d.setDate(d.getDate() + offset);
+            return d.toISOString().split('T')[0];
+        }
+
+        function formatDateDisplay(dateStr) {
+            const d = new Date(dateStr + 'T00:00:00');
+            return d.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function formatDayName(dateStr) {
+            const d = new Date(dateStr + 'T00:00:00');
+            const names = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+            return names[d.getDay()];
+        }
+
+        function formatTime12(time24) {
+            const [h] = time24.split(':').map(Number);
+            const period = h >= 12 ? 'مساءً' : 'صباحاً';
+            const h12 = h % 12 || 12;
+            return `${h12} ${period}`;
+        }
+
+        function generatePatientId() {
+            return 'P' + Date.now().toString(36) + Math.random().toString(36).substr(2, 4);
+        }
+
+        function isValidWhatsapp(number) {
+            const cleaned = number.replace(/\s/g, '');
+            return /^(09\d{8}|(\+963)\d{9})$/.test(cleaned);
+        }
+
+        // ============================================================
+        // 4. GITHUB GIST API - المصدر الرئيسي للبيانات
+        // ============================================================
+
+        /**
+         * جلب جميع الحجوزات من ملف JSON على Gist
+         */
+        async function getBookingsFromGist() {
+            try {
+                const response = await fetch(GIST_API_URL, {
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Authorization': `token ${GITHUB_TOKEN}`
+                    }
+                });
+                
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.json();
+                
+                const content = data.files['bookings.json'].content;
+                const bookingsData = JSON.parse(content);
+                return bookingsData.bookings || {};
+            } catch (error) {
+                console.error(' خطأ في قراءة الحجوزات من Gist:', error);
+                showToast('فشل في تحميل الحجوزات', 'error');
+                return {};
+            }
+        }
+
+        /**
+         * تحديث ملف JSON بالكامل على Gist
+         */
+        async function updateBookingsInGist(newBookings) {
+            try {
+                const payload = {
+                    files: {
+                        'bookings.json': {
+                            content: JSON.stringify({ bookings: newBookings }, null, 2)
+                        }
+                    }
+                };
+
+                const response = await fetch(GIST_API_URL, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                console.log('✅ تم تحديث الحجوزات في Gist بنجاح');
+                return true;
+            } catch (error) {
+                console.error('❌ خطأ في تحديث الحجوزات في Gist:', error);
+                showToast('فشل في تحديث الحجوزات', 'error');
+                return false;
+            }
+        }
+
+        /**
+         * جلب الحجوزات لتاريخ محدد من Gist
+         */
+        async function fetchBookedSlots(date) {
+            const allBookings = await getBookingsFromGist();
+            return allBookings[date] || {};
+        }
+
+        // ============================================================
+        // 5. TELEGRAM NOTIFICATION - للإشعارات فقط
+        // ============================================================
+
+        /**
+         * إرسال إشعار حجز إلى قناة Telegram (مع أزرار قبول/رفض)
+         */
+        async function sendTelegramNotification(date, time, patientName, whatsapp) {
+            const formattedTime = formatTime12(time);
+            const dateDisplay = formatDateDisplay(date);
+            
+            const whatsappInternational = whatsapp.replace(/^0/, '963');
+            
+            const acceptMessage = `السلام عليكم
+كيف حالك يا ${patientName}
+تم تثبيت موعدك
+يوم ${dateDisplay}
+في تمام الساعة ${formattedTime}
+نتمنى الالتزام`;
+
+            const rejectMessage = `السلام عليكم
+كيف حالك يا ${patientName}
+نود اعلامك بأن الموعد الذي قمت بحجزه غير ملائم
+نتمنى أن تقوم بإلغاء الحجز وحجز موعد جديد`;
+            
+            const acceptUrl = `https://wa.me/${whatsappInternational}?text=${encodeURIComponent(acceptMessage)}`;
+            const rejectUrl = `https://wa.me/${whatsappInternational}?text=${encodeURIComponent(rejectMessage)}`;
+
+            const text = `✅ حجز جديد: ${date} | ${time} |
+-----------------------------
+📅 اليوم: ${dateDisplay}
+⏰ الوقت: ${formattedTime}
+-----------------------------
+👤 المريض: ${patientName}
+📱 واتساب: ${whatsapp}`;
+
+            try {
+                const response = await fetch(`${TG_API}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHANNEL_ID,
+                        text: text,
+                        reply_markup: {
+                            inline_keyboard: [
+                                [
+                                    { text: '✅ قبول', url: acceptUrl },
+                                    { text: '❌ رفض', url: rejectUrl }
+                                ]
+                            ]
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.ok) {
+                    console.log('✅ تم إرسال إشعار Telegram بنجاح');
+                    return { success: true, message_id: data.result.message_id };
+                } else {
+                    console.error('❌ فشل إرسال إشعار Telegram:', data.description);
+                    return { success: false, error: data.description };
+                }
+            } catch (error) {
+                console.error('❌ خطأ في إرسال إشعار Telegram:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // ============================================================
+        // 6. إدارة الحجوزات (Gist + Telegram)
+        // ============================================================
+
+        /**
+         * إضافة حجز جديد: حفظ في Gist + إرسال إشعار Telegram
+         */
+        async function addBooking(date, time, patientName, whatsapp) {
+    // 1. جلب الحجوزات الحالية من Gist
+    const currentBookings = await getBookingsFromGist();
+    
+    // 2. التحقق من أن الموعد غير محجوز
+    if (currentBookings[date] && currentBookings[date][time]) {
+        showToast('هذا الموعد محجوز بالفعل!', 'error');
+        return { success: false, error: 'Slot already booked' };
+    }
+
+    // 3. إضافة الحجز الجديد في Gist
+    if (!currentBookings[date]) {
+        currentBookings[date] = {};
+    }
+    
+    // ⚠️ نضيف حقل messageId لتخزين معرف الرسالة
+    currentBookings[date][time] = {
+        patient: patientName,
+        whatsapp: whatsapp,
+        messageId: null  // سيتم تحديثه بعد إرسال الإشعار
+    };
+
+    // 4. تحديث الملف على Gist (نسخة مؤقتة)
+    const updateSuccess = await updateBookingsInGist(currentBookings);
+    if (!updateSuccess) {
+        return { success: false, error: 'Failed to update Gist' };
+    }
+
+    // 5. إرسال إشعار إلى Telegram
+    const notificationResult = await sendTelegramNotification(date, time, patientName, whatsapp);
+    
+    // 6. ✅ تحديث الحجز بإضافة message_id بعد نجاح الإرسال
+    if (notificationResult.success) {
+        // جلب البيانات مرة أخرى لإضافة messageId
+        const updatedBookings = await getBookingsFromGist();
+        if (updatedBookings[date] && updatedBookings[date][time]) {
+            updatedBookings[date][time].messageId = notificationResult.message_id;
+            await updateBookingsInGist(updatedBookings);
+        }
+        return { success: true, messageId: notificationResult.message_id };
+    } else {
+        // إذا فشل الإشعار، نترك الحجز بدون messageId
+        console.warn('⚠️ تم الحجز لكن فشل إرسال الإشعار');
+        return { success: true, messageId: null };
+    }
+}
+
+        /**
+         * حذف حجز: حذف من Gist
+         */
+async function removeBooking(date, time) {
+    // 1. جلب الحجوزات الحالية
+    const currentBookings = await getBookingsFromGist();
+
+    // 2. التحقق من وجود الحجز
+    if (!currentBookings[date] || !currentBookings[date][time]) {
+        showToast('الموعد غير موجود', 'warning');
+        return false;
+    }
+
+    // 3. استخراج message_id قبل الحذف
+    const bookingData = currentBookings[date][time];
+    const messageId = bookingData.messageId;
+
+    // 4. ✅ حذف الرسالة من Telegram (إذا كان لدينا message_id)
+    if (messageId) {
+        try {
+            const deleteResult = await deleteTelegramMessage(messageId);
+            if (deleteResult) {
+                console.log('✅ تم حذف رسالة Telegram بنجاح');
+            } else {
+                console.warn('⚠️ فشل حذف رسالة Telegram، ولكن سيتم حذف الحجز');
+            }
+        } catch (error) {
+            console.error('❌ خطأ أثناء حذف رسالة Telegram:', error);
+        }
+    }
+
+    // 5. حذف الحجز من Gist
+    delete currentBookings[date][time];
+    
+    // إذا أصبح التاريخ فارغاً، احذفه
+    if (Object.keys(currentBookings[date]).length === 0) {
+        delete currentBookings[date];
+    }
+
+    // 6. تحديث الملف على Gist
+    return await updateBookingsInGist(currentBookings);
+}
+/**
+ * حذف رسالة من قناة Telegram
+ * @param {number} messageId - معرف الرسالة المراد حذفها
+ * @returns {Promise<boolean>} - true إذا نجح الحذف
+ */
+async function deleteTelegramMessage(messageId) {
+    try {
+        const response = await fetch(`${TG_API}/deleteMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: CHANNEL_ID,
+                message_id: messageId
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.ok) {
+            console.log(`✅ تم حذف الرسالة ${messageId} بنجاح`);
+            return true;
+        } else {
+            console.error(`❌ فشل حذف الرسالة ${messageId}:`, data.description);
+            return false;
+        }
+    } catch (error) {
+        console.error('❌ خطأ في حذف الرسالة:', error);
+        return false;
+    }
+}
+        // ============================================================
+        // 7. TOAST NOTIFICATIONS
+        // ============================================================
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-20px) scale(0.9)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // ============================================================
+        // 8. CONFIRM DIALOG
+        // ============================================================
+        function showConfirmDialog(title, message, onConfirm) {
+            const dialog = document.getElementById('confirmDialog');
+            document.getElementById('dialogTitle').textContent = title;
+            document.getElementById('dialogMessage').textContent = message;
+            dialog.classList.add('active');
+
+            const confirmBtn = document.getElementById('dialogConfirmBtn');
+            const cancelBtn = document.getElementById('dialogCancelBtn');
+
+            const cleanup = () => {
+                dialog.classList.remove('active');
+                confirmBtn.removeEventListener('click', handleConfirm);
+                cancelBtn.removeEventListener('click', handleCancel);
+            };
+
+            const handleConfirm = () => {
+                cleanup();
+                onConfirm();
+            };
+
+            const handleCancel = () => {
+                cleanup();
+            };
+
+            confirmBtn.addEventListener('click', handleConfirm);
+            cancelBtn.addEventListener('click', handleCancel);
+
+            dialog.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    cleanup();
+                }
+            });
+        }
+
+        // ============================================================
+        // 9. SLOTS DISPLAY
+        // ============================================================
+        async function loadSlotsForDay(dayOffset) {
+            const date = getDateFromDayOffset(dayOffset);
+            state.selectedDate = date;
+
+            const container = document.getElementById('slotsContainer');
+            container.innerHTML = `
+                <div class="slot-loading">
+                    <div class="spinner"></div>
+                    <div>جاري تحميل المواعيد...</div>
+                </div>
+            `;
+
+            try {
+                const booked = await fetchBookedSlots(date);
+                state.bookedSlots = booked;
+
+                const allSlots = [];
+                for (let h = WORK_START; h < WORK_END; h++) {
+                    const time = `${String(h).padStart(2, '0')}:00`;
+                    const isBooked = !!booked[time];
+                    allSlots.push({ time, isBooked });
+                }
+                state.allSlots = allSlots;
+
+                if (allSlots.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align:center;padding:50px 0;color:var(--text-muted);">
+                            <div style="font-size:16px;font-weight:600;">لا توجد مواعيد متاحة</div>
+                            <div style="font-size:14px;margin-top:4px;">لهذا اليوم</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                for (const slot of allSlots) {
+                    const statusClass = slot.isBooked ? 'booked' : 'available';
+                    const statusText = slot.isBooked ? 'محجوز' : 'متاح';
+                    const timeDisplay = formatTime12(slot.time);
+                    const clickAttr = slot.isBooked ? '' : ` onclick="openBookingModal('${slot.time}')"`;
+
+                    html += `
+                        <div class="slot-item ${statusClass}" ${clickAttr}>
+                            <span class="slot-time">${timeDisplay}</span>
+                            <span class="slot-status ${statusClass}">${statusText}</span>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = html;
+
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = `
+                    <div style="text-align:center;padding:50px 0;color:var(--text-muted);">
+                        <div style="font-size:16px;font-weight:600;">حدث خطأ</div>
+                        <div style="font-size:14px;margin-top:4px;">فشل تحميل المواعيد</div>
+                    </div>
+                `;
+                showToast('فشل تحميل المواعيد، حاول مرة أخرى', 'error');
+            }
+        }
+
+        // ============================================================
+        // 10. DAY SELECTOR
+        // ============================================================
+        function setupDaySelector() {
+            const btns = document.querySelectorAll('.day-btn');
+
+            for (let i = 0; i < 3; i++) {
+                const date = getDateFromDayOffset(i + 1);
+                const names = ['غداً', 'بعد غد', 'ما بعده'];
+                document.getElementById(`dayName${i}`).textContent = names[i];
+                document.getElementById(`dayDate${i}`).textContent = formatDayName(date) + ' ' + date.split('-').slice(1).join('/');
+            }
+
+            btns.forEach((btn, index) => {
+                btn.addEventListener('click', function() {
+                    btns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    state.selectedDay = index;
+                    loadSlotsForDay(index + 1);
+                });
+            });
+
+            btns[0].classList.add('active');
+            loadSlotsForDay(1);
+        }
+
+        // ============================================================
+        // 11. BOOKING MODAL
+        // ============================================================
+        let selectedTimeForBooking = null;
+
+        function openBookingModal(time) {
+            if (!state.selectedDate) {
+                showToast('الرجاء اختيار تاريخ أولاً', 'warning');
+                return;
+            }
+
+            selectedTimeForBooking = time;
+            document.getElementById('modalSub').textContent =
+                `${formatDateDisplay(state.selectedDate)} - ${formatTime12(time)}`;
+            document.getElementById('patientNameInput').value = '';
+            document.getElementById('whatsappInput').value = '';
+            document.getElementById('whatsappInput').classList.remove('error');
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+            selectedTimeForBooking = null;
+        }
+
+        async function confirmBooking() {
+            const name = document.getElementById('patientNameInput').value.trim();
+            const whatsapp = document.getElementById('whatsappInput').value.trim();
+            const date = state.selectedDate;
+            const time = selectedTimeForBooking;
+
+            if (!name) {
+                showToast('الرجاء إدخال اسمك', 'warning');
+                return;
+            }
+
+            if (!isValidWhatsapp(whatsapp)) {
+                document.getElementById('whatsappInput').classList.add('error');
+                showToast('رقم واتساب غير صحيح. مثال: 0912345678', 'error');
+                return;
+            }
+            document.getElementById('whatsappInput').classList.remove('error');
+
+            // التحقق من أن الموعد ما زال متاحاً
+            const currentBooked = await fetchBookedSlots(date);
+            if (currentBooked[time]) {
+                showToast('هذا الموعد تم حجبه حالياً', 'error');
+                closeBookingModal();
+                loadSlotsForDay(state.selectedDay + 1);
+                return;
+            }
+
+            const patientId = state.patientId || generatePatientId();
+            state.patientId = patientId;
+
+            // إضافة الحجز (Gist + Telegram)
+    const result = await addBooking(date, time, name, whatsapp);
+
+    if (result.success) {
+        const appointment = {
+            date: date,
+            time: time,
+            patientName: name,
+            patientId: patientId,
+            whatsapp: whatsapp,
+            messageId: result.messageId, // ✅ حفظ message_id
+            bookingTimestamp: Date.now(),
+            appointmentTimestamp: new Date(`${date}T${time}:00`).getTime()
+        };
+
+        localStorage.setItem('appointment', JSON.stringify(appointment));
+        state.appointment = appointment;
+
+                closeBookingModal();
+                loadSlotsForDay(state.selectedDay + 1);
+                showAppointmentScreen();
+            } else {
+                showToast(`فشل الحجز: ${result.error}`, 'error');
+            }
+        }
+
+        // ============================================================
+        // 12. APPOINTMENT SCREEN
+        // ============================================================
+        function showAppointmentScreen() {
+            document.getElementById('appointmentScreen').classList.add('active');
+
+            const appt = state.appointment;
+            if (!appt) {
+                showToast('لا يوجد حجز نشط', 'warning');
+                return;
+            }
+
+            document.getElementById('counterDate').textContent = formatDateDisplay(appt.date);
+            document.getElementById('counterTime').textContent = formatTime12(appt.time);
+            document.getElementById('counterPatient').textContent = appt.patientName;
+            document.getElementById('counterWhatsapp').textContent = appt.whatsapp;
+
+            startCounter(appt.appointmentTimestamp);
+            document.getElementById('notificationDot').classList.add('show');
+        }
+
+        function hideAppointmentScreen() {
+            if (state.counterInterval) {
+                clearInterval(state.counterInterval);
+                state.counterInterval = null;
+            }
+            document.getElementById('appointmentScreen').classList.remove('active');
+            state.notificationSent30 = false;
+            state.notificationSentNow = false;
+            document.getElementById('notificationDot').classList.remove('show');
+        }
+
+        function startCounter(targetTimestamp) {
+            if (state.counterInterval) {
+                clearInterval(state.counterInterval);
+            }
+
+            function updateCounter() {
+                const now = Date.now();
+                let diff = targetTimestamp - now;
+
+                if (diff <= 0) {
+                    document.getElementById('counterDisplay').textContent = '00:00:00';
+                    document.getElementById('counterDisplay').classList.add('urgent');
+                    document.getElementById('progressFill').style.width = '0%';
+                    document.getElementById('progressFill').classList.add('urgent');
+
+                    if (state.counterInterval) {
+                        clearInterval(state.counterInterval);
+                        state.counterInterval = null;
+                    }
+
+                    localStorage.removeItem('appointment');
+                    state.appointment = null;
+                    showToast('انتهى موعدك', 'info');
+
+                    setTimeout(() => {
+                        hideAppointmentScreen();
+                    }, 2000);
+                    return;
+                }
+
+                const hours = Math.floor(diff / 3600000);
+                const mins = Math.floor((diff % 3600000) / 60000);
+                const secs = Math.floor((diff % 60000) / 1000);
+
+                document.getElementById('counterDisplay').textContent =
+                    `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+                const totalDuration = 3600000;
+                const progress = Math.max(0, (diff / totalDuration) * 100);
+                document.getElementById('progressFill').style.width = `${Math.min(100, progress)}%`;
+
+                if (diff < 600000) {
+                    document.getElementById('counterDisplay').classList.add('urgent');
+                    document.getElementById('progressFill').classList.add('urgent');
+                } else {
+                    document.getElementById('counterDisplay').classList.remove('urgent');
+                    document.getElementById('progressFill').classList.remove('urgent');
+                }
+
+                checkNotifications(diff);
+            }
+
+            updateCounter();
+            state.counterInterval = setInterval(updateCounter, 1000);
+        }
+
+        // ============================================================
+        // 13. NOTIFICATIONS (الإشعارات المحلية)
+        // ============================================================
+        function checkNotifications(diff) {
+            if (diff > 0 && diff <= 3600000 && diff > 3500000 && !state.notificationSent30) {
+                sendNotification('تذكير', 'موعدك بعد ساعة');
+                state.notificationSent30 = true;
+            }
+            if (diff > 0 && diff <= 60000 && !state.notificationSentNow) {
+                sendNotification('موعدك الآن', 'حان وقت موعدك في العيادة');
+                state.notificationSentNow = true;
+            }
+        }
+
+        function sendNotification(title, body) {
+            if (!('Notification' in window)) return;
+            if (Notification.permission === 'granted') {
+                new Notification(title, { body, icon: '🦷' });
+            }
+        }
+
+        async function requestNotificationPermission() {
+            if (!('Notification' in window)) {
+                showToast('المتصفح لا يدعم الإشعارات', 'warning');
+                return;
+            }
+            if (Notification.permission === 'granted') {
+                showToast('الإشعارات مفعلة', 'success');
+                return;
+            }
+            if (Notification.permission === 'denied') {
+                showToast('الإشعارات ممنوعة، فعّلها من الإعدادات', 'warning');
+                return;
+            }
+            const result = await Notification.requestPermission();
+            if (result === 'granted') {
+                showToast('تم تفعيل الإشعارات', 'success');
+            } else {
+                showToast('لم يتم تفعيل الإشعارات', 'warning');
+            }
+        }
+
+        // ============================================================
+        // 14. CANCEL APPOINTMENT
+        // ============================================================
+async function cancelAppointment() {
+    const appt = state.appointment;
+    if (!appt) {
+        showToast('لا يوجد حجز نشط', 'warning');
+        return;
+    }
+
+    showConfirmDialog(
+        '🗑 إلغاء الموعد',
+        `هل أنت متأكد من إلغاء حجز ${formatDateDisplay(appt.date)} الساعة ${formatTime12(appt.time)}؟`,
+        async function() {
+            // ✅ حذف الحجز (سيحذف رسالة Telegram تلقائياً)
+            const success = await removeBooking(appt.date, appt.time);
+            
+            if (success) {
+                localStorage.removeItem('appointment');
+                state.appointment = null;
+                showToast('تم إلغاء الحجز بنجاح', 'success');
+                hideAppointmentScreen();
+                loadSlotsForDay(state.selectedDay + 1);
+            } else {
+                showToast('فشل إلغاء الحجز، حاول مرة أخرى', 'error');
+            }
+        }
+    );
+}
+
+        // ============================================================
+        // 15. THEME TOGGLE
+        // ============================================================
+        function toggleTheme() {
+            state.isDark = !state.isDark;
+            document.documentElement.setAttribute('data-theme', state.isDark ? 'night' : 'day');
+            localStorage.setItem('theme', state.isDark ? 'night' : 'day');
+
+            const icon = document.querySelector('#navTheme i');
+            if (state.isDark) {
+                icon.className = 'fas fa-sun';
+                showToast('تم التبديل للثيم الليلي', 'info');
+            } else {
+                icon.className = 'fas fa-moon';
+                showToast('تم التبديل للثيم النهاري', 'info');
+            }
+        }
+
+        function loadTheme() {
+            const saved = localStorage.getItem('theme');
+            const icon = document.querySelector('#navTheme i');
+            if (saved === 'night') {
+                state.isDark = true;
+                document.documentElement.setAttribute('data-theme', 'night');
+                icon.className = 'fas fa-sun';
+            } else {
+                state.isDark = false;
+                document.documentElement.setAttribute('data-theme', 'day');
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // ============================================================
+        // 16. LOAD APPOINTMENT FROM STORAGE
+        // ============================================================
+        function loadAppointmentFromStorage() {
+            const stored = localStorage.getItem('appointment');
+            if (!stored) return null;
+
+            try {
+                const appt = JSON.parse(stored);
+                const now = Date.now();
+                const apptTime = new Date(`${appt.date}T${appt.time}:00`).getTime();
+                if (apptTime > now) {
+                    state.appointment = appt;
+                    state.patientId = appt.patientId;
+                    return appt;
+                } else {
+                    localStorage.removeItem('appointment');
+                    return null;
+                }
+            } catch (e) {
+                localStorage.removeItem('appointment');
+                return null;
+            }
+        }
+
+        // ============================================================
+        // 17. PWA INSTALLATION
+        // ============================================================
+
+        function setupInstall() {
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                document.getElementById('navInstall').style.display = 'flex';
+            });
+
+            document.getElementById('navInstall').addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const result = await deferredPrompt.userChoice;
+                    if (result.outcome === 'accepted') {
+                        showToast('✅ تم تثبيت التطبيق بنجاح', 'success');
+                        document.getElementById('navInstall').style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                }
+            });
+
+            window.addEventListener('appinstalled', () => {
+                document.getElementById('navInstall').style.display = 'none';
+            });
+        }
+
+        // ============================================================
+        // 18. AUTO REFRESH
+        // ============================================================
+        function startAutoRefresh() {
+            setInterval(async () => {
+                if (state.selectedDate) {
+                    console.log('🔄 تحديث المواعيد تلقائياً...');
+                    await loadSlotsForDay(state.selectedDay + 1);
+                }
+            }, 30000);
+        }
+
+        // ============================================================
+        // 19. INIT
+        // ============================================================
+        async function init() {
+            loadTheme();
+            setupDaySelector();
+            setupInstall();
+            startAutoRefresh();
+
+            const appt = loadAppointmentFromStorage();
+            if (appt) {
+                const booked = await fetchBookedSlots(appt.date);
+                if (booked[appt.time]) {
+                    state.appointment = appt;
+                    showAppointmentScreen();
+                } else {
+                    localStorage.removeItem('appointment');
+                    state.appointment = null;
+                }
+            }
+
+            // Event Listeners
+            document.getElementById('modalConfirmBtn').addEventListener('click', confirmBooking);
+            document.getElementById('modalCancelBtn').addEventListener('click', closeBookingModal);
+
+            document.getElementById('bookingModal').addEventListener('click', function(e) {
+                if (e.target === this) closeBookingModal();
+            });
+
+            document.getElementById('whatsappInput').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') confirmBooking();
+            });
+            document.getElementById('patientNameInput').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') document.getElementById('whatsappInput').focus();
+            });
+
+            document.getElementById('cancelAppointmentBtn').addEventListener('click', cancelAppointment);
+
+            document.getElementById('navTheme').addEventListener('click', toggleTheme);
+            document.getElementById('navNotifications').addEventListener('click', requestNotificationPermission);
+
+            console.log('🏥 عيادة كريستال السنية التجميلية - جاهزة!');
+            console.log('📁 تستخدم GitHub Gist لتخزين البيانات');
+            console.log('📨 تستخدم Telegram لإرسال الإشعارات فقط');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('Unhandled error:', e.reason);
+            showToast('حدث خطأ غير متوقع', 'error');
+        });
+    </script>
+    <!-- Manifest -->
+<link rel="manifest" href="/manifest.json">
+
+<!-- Service Worker -->
+<script>
+    // تسجيل Service Worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('✅ Service Worker registered:', registration);
+                })
+                .catch(error => {
+                    console.error('❌ Service Worker registration failed:', error);
+                });
+        });
+    }
+
+    // التحقق من إمكانية التثبيت وإظهار زر التثبيت
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // منع العرض التلقائي لـ Chrome
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        // إظهار زر التثبيت المخصص (اختياري)
+        const installBtn = document.getElementById('installBtn');
+        if (installBtn) {
+            installBtn.style.display = 'flex';
+            installBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const result = await deferredPrompt.userChoice;
+                    console.log('Installation result:', result);
+                    deferredPrompt = null;
+                    installBtn.style.display = 'none';
+                }
+            });
+        }
+    });
+
+    // عند نجاح التثبيت
+    window.addEventListener('appinstalled', () => {
+        console.log('✅ App installed successfully!');
+        document.getElementById('installBtn')?.remove();
+    });
+</script>
+
+<!-- زر التثبيت المخصص (اختياري) -->
+<button id="installBtn" style="display:none; position:fixed; bottom:80px; right:20px; z-index:999; background:#e84393; color:white; border:none; border-radius:50%; width:56px; height:56px; font-size:24px; box-shadow:0 4px 20px rgba(232,67,147,0.4); cursor:pointer;">
+</button>
+</body>
+</html>
