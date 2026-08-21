@@ -14,3 +14,8 @@ node_modules/
 # ملفات IDE
 .vscode/
 .idea/
+
+config.js
+.env
+node_modules/
+.DS_Store
