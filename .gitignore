@@ -1,0 +1,6 @@
+# منع ملفات البيئة
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
