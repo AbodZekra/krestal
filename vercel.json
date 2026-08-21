@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "index.html",
+            "use": "@vercel/static"
+        }
+    ],
+    "env": {
+        "GITHUB_TOKEN": "@github-token",
+        "GIST_ID": "@gist-id",
+        "BOT_TOKEN": "@bot-token",
+        "CHANNEL_ID": "@channel-id"
+    }
+}
