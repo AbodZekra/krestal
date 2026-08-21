@@ -982,7 +982,7 @@ APPOINTMENT SCREEN - Full Screen (نسخة محسنة)
             <span class="tooltip">تحميل التطبيق</span>
         </button>
     </nav>
-
+<script src="config.js"></script>
     <!-- ==========================================================
     JAVASCRIPT - النظام الهجين (Gist + Telegram)
     ========================================================== -->
@@ -991,13 +991,14 @@ APPOINTMENT SCREEN - Full Screen (نسخة محسنة)
         // 1. CONFIGURATION
         // ============================================================
         // --- إعدادات GitHub Gist (المصدر الرئيسي للبيانات) ---
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
-const GIST_ID = process.env.GIST_ID || '4948190fffffd08cf921b2530527160e';
+const GITHUB_TOKEN = window.GITHUB_TOKEN || '';
+const GIST_ID = window.GIST_ID || '4948190fffffd08cf921b2530527160e';
+
 const GIST_API_URL = `https://api.github.com/gists/${GIST_ID}`;
 
 // --- إعدادات Telegram ---
-const BOT_TOKEN = process.env.BOT_TOKEN || '8897871748:AAHV92-lLyKfivHVnBdQ0HK7HJeOHo43qAs';
-const CHANNEL_ID = process.env.CHANNEL_ID || '-1004482903707';
+const BOT_TOKEN = window.BOT_TOKEN || '8897871748:AAHV92-lLyKfivHVnBdQ0HK7HJeOHo43qAs';
+const CHANNEL_ID = window.CHANNEL_ID || '-1004482903707';
 const TG_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
         const CLINIC_NAME = 'عيادة كريستال السنية التجميلية';

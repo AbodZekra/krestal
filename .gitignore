@@ -1,6 +1,15 @@
-# منع ملفات البيئة
+# ملفات البيئة
 .env
 .env.local
 .env.*.local
 .env.production
 .env.development
+
+# الملفات المحلية
+local-config.js
+config.js
+*.secret
+
+# مجلدات التثبيت
+node_modules/
+.vercel/
