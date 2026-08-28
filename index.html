@@ -999,15 +999,12 @@ APPOINTMENT SCREEN - Full Screen (نسخة محسنة)
         // 1. CONFIGURATION
         // ============================================================
         // --- إعدادات GitHub Gist (المصدر الرئيسي للبيانات) ---
-const GITHUB_TOKEN = window.GITHUB_TOKEN || '';
-const GIST_ID = window.GIST_ID || '4c5756a212bf9adb8c54d458dfaa1893';
-
-const GIST_API_URL = `https://api.github.com/gists/${GIST_ID}`;
-
-// --- إعدادات Telegram ---
-const BOT_TOKEN = window.BOT_TOKEN || '8897871748:AAHV92-lLyKfivHVnBdQ0HK7HJeOHo43qAs';
-const CHANNEL_ID = window.CHANNEL_ID || '-1004482903707';
-const TG_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
+let GITHUB_TOKEN = '';
+let GIST_ID = '4c5756a212bf9adb8c54d458dfaa1893';
+let GIST_API_URL = `https://api.github.com/gists/${GIST_ID}`;
+let BOT_TOKEN = '';
+let CHANNEL_ID = '';
+let TG_API = '';
 
         const CLINIC_NAME = 'عيادة كريستال السنية التجميلية';
         const WORK_START = 10;
@@ -1840,7 +1837,7 @@ async function cancelAppointment() {
                 return false;
             }
         }
-        
+
         async function init() {
             // تحميل الإعدادات أولاً
             await loadConfigFromAPI();
