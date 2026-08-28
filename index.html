@@ -6,8 +6,9 @@
     <title>عيادة كريستال السنية التجميلية</title>
     
     <!-- Font Awesome for icons -->
+     <link rel="icon" type="image/png" href="./krestal.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="./manifest.json">
     <style>
         /* ============================================================
            CSS Variables & Themes (نفس الكود السابق - تم اختصاره للتوفير)
@@ -390,7 +391,7 @@
 .appointment-bg-image {
     position: absolute;
     inset: -20px; /* لتوسيع الصورة قليلاً لمنع ظهور الحواف */
-    background: url('pack.png') center center / cover no-repeat;
+    background: url('./pack.png') center center / cover no-repeat;
     filter: blur(2px) brightness(0.6);
     transform: scale(1.05);
     transition: filter 0.5s ease;
@@ -839,10 +840,10 @@
         ========================================================== -->
         <header class="header-section">
             <div class="logo-container">
-                <img src="krestal.png" alt="كريستال" />
+                <img src="./krestal.png" alt="كريستال" />
             </div>
             <h1 class="header-title">عيادة كريستال السنية التجميلية</h1>
-            <p class="header-sub">✨ اهلاً وسهلاً بكم ✨</p>
+            <p class="header-sub">اهلاً وسهلاً بكم</p>
         </header>
 
         <!-- ==========================================================
@@ -942,16 +943,16 @@ APPOINTMENT SCREEN - Full Screen (نسخة محسنة)
     ========================================================== -->
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content">
-            <div class="modal-title">📝 حجز موعد</div>
+            <div class="modal-title"> حجز موعد</div>
             <div class="modal-sub" id="modalSub">تأكيد حجز الموعد</div>
 
             <div class="form-group">
-                <label>👤 الاسم الكامل</label>
+                <label>الاسم الكامل</label>
                 <input type="text" id="patientNameInput" placeholder="أدخل اسمك الكامل" />
             </div>
 
             <div class="form-group">
-                <label>📱 رقم واتساب</label>
+                <label> رقم واتساب</label>
                 <input type="tel" id="whatsappInput" placeholder="مثال: 0912345678" />
             </div>
 
@@ -982,7 +983,7 @@ APPOINTMENT SCREEN - Full Screen (نسخة محسنة)
             <span class="tooltip">تحميل التطبيق</span>
         </button>
     </nav>
-<script src="config.js"></script>
+<script src="./config.js"></script>
     <!-- ==========================================================
     JAVASCRIPT - النظام الهجين (Gist + Telegram)
     ========================================================== -->
@@ -1872,7 +1873,7 @@ async function cancelAppointment() {
     // تسجيل Service Worker
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
+            navigator.serviceWorker.register('./sw.js')
                 .then(registration => {
                     console.log('✅ Service Worker registered:', registration);
                 })
