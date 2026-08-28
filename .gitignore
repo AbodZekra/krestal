@@ -5,9 +5,9 @@
 .env.production
 .env.development
 
-# الملفات المحلية
-local-config.js
+# الملفات الحساسة
 config.js
+local-config.js
 *.secret
 
 # مجلدات التثبيت

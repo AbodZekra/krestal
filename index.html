@@ -9,6 +9,15 @@
      <link rel="icon" type="image/png" href="./krestal.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="manifest" href="./manifest.json">
+
+        <script>
+        // هذه المتغيرات ستأتي من Vercel Environment Variables
+        window.GITHUB_TOKEN = '{{GITHUB_TOKEN}}' || '';
+        window.GIST_ID = '{{GIST_ID}}' || '4c5756a212bf9adb8c54d458dfaa1893';
+        window.BOT_TOKEN = '{{BOT_TOKEN}}' || '';
+        window.CHANNEL_ID = '{{CHANNEL_ID}}' || '';
+        
+    </script>
     <style>
         /* ============================================================
            CSS Variables & Themes (نفس الكود السابق - تم اختصاره للتوفير)
@@ -983,7 +992,6 @@ APPOINTMENT SCREEN - Full Screen (نسخة محسنة)
             <span class="tooltip">تحميل التطبيق</span>
         </button>
     </nav>
-<script src="./config.js"></script>
     <!-- ==========================================================
     JAVASCRIPT - النظام الهجين (Gist + Telegram)
     ========================================================== -->
@@ -1913,8 +1921,5 @@ async function cancelAppointment() {
     });
 </script>
 
-<!-- زر التثبيت المخصص (اختياري) -->
-<button id="installBtn" style="display:none; position:fixed; bottom:80px; right:20px; z-index:999; background:#e84393; color:white; border:none; border-radius:50%; width:56px; height:56px; font-size:24px; box-shadow:0 4px 20px rgba(232,67,147,0.4); cursor:pointer;">
-</button>
 </body>
 </html>
