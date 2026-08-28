@@ -10,14 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="manifest" href="./manifest.json">
 
-        <script>
-        // هذه المتغيرات ستأتي من Vercel Environment Variables
-        window.GITHUB_TOKEN = '{{GITHUB_TOKEN}}' || '';
-        window.GIST_ID = '{{GIST_ID}}' || '4c5756a212bf9adb8c54d458dfaa1893';
-        window.BOT_TOKEN = '{{BOT_TOKEN}}' || '';
-        window.CHANNEL_ID = '{{CHANNEL_ID}}' || '';
-        
-    </script>
+<script>
+    // سيتم تحميل الإعدادات من API
+    window.GITHUB_TOKEN = '';
+    window.GIST_ID = '4c5756a212bf9adb8c54d458dfaa1893';
+    window.BOT_TOKEN = '';
+    window.CHANNEL_ID = '';
+</script>
     <style>
         /* ============================================================
            CSS Variables & Themes (نفس الكود السابق - تم اختصاره للتوفير)
@@ -1823,7 +1822,34 @@ async function cancelAppointment() {
         // ============================================================
         // 19. INIT
         // ============================================================
+
+        async function loadConfigFromAPI() {
+            try {
+                const response = await fetch('/api/config');
+                const config = await response.json();
+                
+                window.GITHUB_TOKEN = config.GITHUB_TOKEN || '';
+                window.GIST_ID = config.GIST_ID || '4c5756a212bf9adb8c54d458dfaa1893';
+                window.BOT_TOKEN = config.BOT_TOKEN || '';
+                window.CHANNEL_ID = config.CHANNEL_ID || '';
+                
+                console.log('✅ تم تحميل الإعدادات من API');
+                return true;
+            } catch (error) {
+                console.error('❌ فشل تحميل الإعدادات:', error);
+                return false;
+            }
+        }
+        
         async function init() {
+            // تحميل الإعدادات أولاً
+            await loadConfigFromAPI();
+            
+            // تحديث الثوابت بعد تحميل الإعدادات
+            GITHUB_TOKEN = window.GITHUB_TOKEN;
+            BOT_TOKEN = window.BOT_TOKEN;
+            CHANNEL_ID = window.CHANNEL_ID;
+            
             loadTheme();
             setupDaySelector();
             setupInstall();
