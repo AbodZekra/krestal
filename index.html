@@ -7,15 +7,16 @@
     
     <link rel="icon" type="image/png" href="./krestali.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="manifest" href="./manifest.json">
 
 
-    <!-- PWA Meta Tags -->
-        <meta name="theme-color" content="#e84393" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="كريستال" />
-        <link rel="apple-touch-icon" href="icon-192.png" />
+
+<!-- PWA Meta Tags -->
+<meta name="theme-color" content="#e84393" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="كريستال" />
+<link rel="apple-touch-icon" href="./icon-192.png" />
+<link rel="manifest" href="./manifest.json" />
      <style>
         /* نفس الـ CSS السابق بالكامل */
         :root {
@@ -1305,34 +1306,49 @@ async function loadConfig() {
         }
     }
 
-    // ============================================================
-    // PWA INSTALLATION
-    // ============================================================
-    let deferredPrompt;
+// تحسين كود التثبيت
+let deferredPrompt;
 
-    function setupInstall() {
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('navInstall').style.display = 'flex';
-        });
+function setupInstall() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // منع العرض التلقائي
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        // عرض زر التثبيت
+        const installBtn = document.getElementById('navInstall');
+        if (installBtn) {
+            installBtn.style.display = 'flex';
+        }
+        
+        console.log('✅ beforeinstallprompt مستعد');
+    });
 
-        document.getElementById('navInstall').addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const result = await deferredPrompt.userChoice;
-                if (result.outcome === 'accepted') {
-                    showToast('✅ تم تثبيت التطبيق بنجاح', 'success');
-                    document.getElementById('navInstall').style.display = 'none';
-                }
-                deferredPrompt = null;
-            }
-        });
-
-        window.addEventListener('appinstalled', () => {
+    document.getElementById('navInstall').addEventListener('click', async () => {
+        if (!deferredPrompt) {
+            showToast('التطبيق مثبت بالفعل أو غير متاح للتثبيت', 'warning');
+            return;
+        }
+        
+        deferredPrompt.prompt();
+        const result = await deferredPrompt.userChoice;
+        
+        if (result.outcome === 'accepted') {
+            showToast('✅ تم تثبيت التطبيق بنجاح', 'success');
             document.getElementById('navInstall').style.display = 'none';
-        });
-    }
+        } else {
+            showToast('تم إلغاء التثبيت', 'info');
+        }
+        
+        deferredPrompt = null;
+    });
+
+    window.addEventListener('appinstalled', () => {
+        console.log('✅ تم تثبيت التطبيق');
+        document.getElementById('navInstall').style.display = 'none';
+        showToast('تم تثبيت التطبيق بنجاح', 'success');
+    });
+}
 
     // ============================================================
     // AUTO REFRESH
@@ -1465,17 +1481,46 @@ function addDiagnosticButton() {
 </script>
     <!-- Service Worker -->
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(registration => {
-                        console.log('✅ Service Worker registered:', registration);
-                    })
-                    .catch(error => {
-                        console.error('❌ Service Worker registration failed:', error);
+// تسجيل Service Worker مع دعم أفضل
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        // تحديد المسار الصحيح
+        const swPath = './sw.js';
+        
+        navigator.serviceWorker.register(swPath, {
+            scope: './'
+        })
+        .then(registration => {
+            console.log('✅ Service Worker registered:', registration);
+            
+            // التحقق من التحديثات
+            registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                if (newWorker) {
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // يوجد تحديث جديد
+                            console.log('🔄 تحديث جديد متاح');
+                            showToast('تحديث جديد متاح، سيتم التحديث تلقائياً', 'info');
+                            newWorker.postMessage('SKIP_WAITING');
+                        }
                     });
+                }
             });
-        }
+        })
+        .catch(error => {
+            console.error('❌ Service Worker registration failed:', error);
+        });
+        
+        // إعادة تحميل الصفحة عند تغيير الـ SW
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (refreshing) return;
+            refreshing = true;
+            window.location.reload();
+        });
+    });
+}
     </script>
 
 </body>
