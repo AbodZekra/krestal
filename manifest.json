@@ -1,15 +1,15 @@
 {
   "name": "عيادة كريستال السنية التجميلية",
   "short_name": "كريستال",
-  "description": "حجز مواعيد عيادة كريستال السنية التجميلية",
+  "description": "نظام حجز المواعيد لعيادة كريستال السنية",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fdf2f8",
   "theme_color": "#e84393",
-  "dir": "rtl",
   "lang": "ar",
-  "categories": ["medical", "health", "appointments"],
+  "dir": "rtl",
   "icons": [
     {
       "src": "icon-192.png",
@@ -24,29 +24,6 @@
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "screenshot-1.png",
-      "sizes": "1080x1920",
-      "type": "image/png"
-    }
-  ],
   "prefer_related_applications": false,
-  "related_applications": [],
-  "shortcuts": [
-    {
-      "name": "حجز موعد",
-      "short_name": "حجز",
-      "description": "اذهب لحجز موعد جديد",
-      "url": "/#booking",
-      "icons": [{ "src": "icon-booking.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "مواعيدي",
-      "short_name": "مواعيدي",
-      "description": "عرض مواعيدي المحجوزة",
-      "url": "/#my-bookings",
-      "icons": [{ "src": "icon-bookings.png", "sizes": "96x96" }]
-    }
-  ]
+  "categories": ["medical", "health", "business"]
 }

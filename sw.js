@@ -1,11 +1,11 @@
 // sw.js - Service Worker (نسخة محسنة)
-const CACHE_NAME = 'krestal-clinic-v4';
+const CACHE_NAME = 'krestal-clinic-v5';
 
 const CORE_ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './krestal.png',
+  './krestali.png',
   './pack.png',
   './icon-192.png',
   './icon-512.png'

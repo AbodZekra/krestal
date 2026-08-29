@@ -9,7 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="manifest" href="./manifest.json">
 
-    <style>
+
+    <!-- PWA Meta Tags -->
+        <meta name="theme-color" content="#e84393" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="كريستال" />
+        <link rel="apple-touch-icon" href="icon-192.png" />
+     <style>
         /* نفس الـ CSS السابق بالكامل */
         :root {
             --bg-primary: #fdf2f8;
@@ -570,13 +577,6 @@ async function loadConfig() {
     BOT_TOKEN = '8897871748:AAHV92-lLyKfivHVnBdQ0HK7HJeOHo43qAs';
     CHANNEL_ID = '-1004482903707';
     TG_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
-    
-    console.log('✅ تم تحميل الإعدادات محلياً');
-    console.log('Supabase URL:', SUPABASE_URL);
-    console.log('Supabase Key:', SUPABASE_ANON_KEY.substring(0, 30) + '...');
-    console.log('Bot Token:', BOT_TOKEN.substring(0, 20) + '...');
-    console.log('Channel ID:', CHANNEL_ID);
-    
     return true;
 }
     const WORK_START = 10;
