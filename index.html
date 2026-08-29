@@ -31,7 +31,7 @@
             --accent-dark: #c2186b;
             --border-glass: rgba(232, 67, 147, 0.2);
             --shadow-glass: 0 4px 20px rgba(232, 67, 147, 0.1);
-            --gradient-header: linear-gradient(135deg, #f8bbd0, #fce4ec);
+            --gradient-header: linear-gradient(135deg, #e84393, #e84393);
             --safe-area-top: env(safe-area-inset-top, 0px);
             --safe-area-bottom: env(safe-area-inset-bottom, 0px);
         }
@@ -1108,7 +1108,7 @@
 
             <div class="form-group">
                 <label>رقم واتساب</label>
-                <input type="tel" id="whatsappInput" placeholder="مثال: 0912345678" />
+                <input type="tel" id="whatsappInput" placeholder="+9631345678" />
             </div>
 
             <div class="modal-actions">
@@ -1388,7 +1388,7 @@ async function loadConfig() {
         const formattedTime = formatTime12(time);
         const dateDisplay = formatDateDisplay(date);
         
-        const whatsappInternational = whatsapp.replace(/^0/, '963');
+        const whatsappInternational = whatsapp.replace(/^0/, '+963');
         
         const acceptMessage = `السلام عليكم\nكيف حالك يا ${patientName}\nتم تثبيت موعدك\nيوم ${dateDisplay}\nفي تمام الساعة ${formattedTime}\nنتمنى الالتزام`;
 
@@ -1653,7 +1653,7 @@ async function confirmBooking() {
 
     if (!isValidWhatsapp(whatsapp)) {
         document.getElementById('whatsappInput').classList.add('error');
-        showToast('رقم واتساب غير صحيح. مثال: 0912345678', 'error');
+        showToast('رقم واتساب غير صحيح. مثال: +9631345678', 'error');
         return;
     }
     document.getElementById('whatsappInput').classList.remove('error');
