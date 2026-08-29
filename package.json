@@ -1,12 +1,13 @@
 {
-  "name": "clinic-booking",
-  "version": "1.0.0",
-  "description": "عيادة كريستال السنية التجميلية",
-  "main": "index.html",
+  "name": "krestal-clinic",
+  "version": "2.0.0",
+  "description": "عيادة كريستال السنية التجميلية - نظام حجز المواعيد",
+  "private": true,
   "scripts": {
-    "build": "echo 'No build needed'"
+    "build": "echo 'Static site - No build needed'",
+    "start": "vercel dev"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.0"
+    "@supabase/supabase-js": "^2.45.0"
   }
 }

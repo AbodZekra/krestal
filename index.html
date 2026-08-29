@@ -540,11 +540,31 @@
     // CONFIGURATION - Supabase + Telegram
     // ============================================================
 // في ملف index.html
-const SUPABASE_URL = window.ENV.SUPABASE_URL;
-const SUPABASE_ANON_KEY = window.ENV.SUPABASE_ANON_KEY;
-const BOT_TOKEN = window.ENV.BOT_TOKEN;
-const CHANNEL_ID = window.ENV.CHANNEL_ID;
-    const TG_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
+let SUPABASE_URL = '';
+let SUPABASE_ANON_KEY = '';
+let BOT_TOKEN = '';
+let CHANNEL_ID = '';
+let TG_API = '';
+
+async function loadConfig() {
+    try {
+        const response = await fetch('/api/config');
+        if (!response.ok) throw new Error('Failed to fetch config');
+        const config = await response.json();
+        
+        SUPABASE_URL = config.SUPABASE_URL;
+        SUPABASE_ANON_KEY = config.SUPABASE_ANON_KEY;
+        BOT_TOKEN = config.BOT_TOKEN;
+        CHANNEL_ID = config.CHANNEL_ID;
+        TG_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
+        
+        console.log('✅ تم تحميل الإعدادات من API');
+        return true;
+    } catch (error) {
+        console.error('❌ فشل تحميل الإعدادات:', error);
+        return false;
+    }
+}
     const WORK_START = 10;
     const WORK_END = 20;
 
@@ -1317,7 +1337,18 @@ const CHANNEL_ID = window.ENV.CHANNEL_ID;
     // ============================================================
     async function init() {
         console.log('🚀 بدء تهيئة التطبيق...');
-        
+            // تحميل الإعدادات أولاً
+    const configLoaded = await loadConfig();
+    if (!configLoaded) {
+        showToast('فشل تحميل الإعدادات', 'error');
+        return;
+    }
+    
+    // تهيئة Supabase بعد تحميل الإعدادات
+    if (!initSupabase()) {
+        showToast('فشل تحميل Supabase', 'error');
+        return;
+    }
         // تهيئة Supabase
         if (!initSupabase()) {
             showToast('فشل تحميل Supabase', 'error');
