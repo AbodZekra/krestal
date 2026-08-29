@@ -1,15 +1,4 @@
-# ملفات البيئة
+node_modules
 .env
-.env.local
-.env.*.local
-.env.production
-.env.development
-
-# الملفات الحساسة
-config.js
-local-config.js
-*.secret
-
-# مجلدات التثبيت
-node_modules/
-.vercel/
+.DS_Store
+*.log

@@ -4,18 +4,20 @@
     {
       "src": "index.html",
       "use": "@vercel/static"
+    },
+    {
+      "src": "api/config.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ],
-  "env": {
-    "GITHUB_TOKEN": "@github_token",
-    "GIST_ID": "@gist_id",
-    "BOT_TOKEN": "@bot_token",
-    "CHANNEL_ID": "@channel_id"
-  }
+  ]
 }
