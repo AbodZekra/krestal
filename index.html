@@ -547,23 +547,37 @@ let CHANNEL_ID = '';
 let TG_API = '';
 
 async function loadConfig() {
+    // محاولة التحميل من API (Vercel)
     try {
         const response = await fetch('/api/config');
-        if (!response.ok) throw new Error('Failed to fetch config');
-        const config = await response.json();
-        
-        SUPABASE_URL = config.SUPABASE_URL;
-        SUPABASE_ANON_KEY = config.SUPABASE_ANON_KEY;
-        BOT_TOKEN = config.BOT_TOKEN;
-        CHANNEL_ID = config.CHANNEL_ID;
-        TG_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
-        
-        console.log('✅ تم تحميل الإعدادات من API');
-        return true;
-    } catch (error) {
-        console.error('❌ فشل تحميل الإعدادات:', error);
-        return false;
+        if (response.ok) {
+            const config = await response.json();
+            SUPABASE_URL = config.SUPABASE_URL;
+            SUPABASE_ANON_KEY = config.SUPABASE_ANON_KEY;
+            BOT_TOKEN = config.BOT_TOKEN;
+            CHANNEL_ID = config.CHANNEL_ID;
+            TG_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
+            console.log('✅ تم تحميل الإعدادات من API (Vercel)');
+            return true;
+        }
+    } catch (e) {
+        console.log('⚠️ لم يتم التحميل من API، سيتم استخدام الإعدادات المحلية');
     }
+    
+    // إذا فشل التحميل من API، استخدم القيم المحلية (للتطوير فقط)
+    SUPABASE_URL = 'https://upfrpjtbtkrpwmxgcthh.supabase.co';
+    SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwZnJwanRidGtycHdteGdjdGhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5MjkyMTgsImV4cCI6MjEwMzUwNTIxOH0.Au-8O1uhBgYsAfiCtks-FElgSQR6B0P6m2_1eBcT7iY';
+    BOT_TOKEN = '8897871748:AAHV92-lLyKfivHVnBdQ0HK7HJeOHo43qAs';
+    CHANNEL_ID = '-1004482903707';
+    TG_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
+    
+    console.log('✅ تم تحميل الإعدادات محلياً');
+    console.log('Supabase URL:', SUPABASE_URL);
+    console.log('Supabase Key:', SUPABASE_ANON_KEY.substring(0, 30) + '...');
+    console.log('Bot Token:', BOT_TOKEN.substring(0, 20) + '...');
+    console.log('Channel ID:', CHANNEL_ID);
+    
+    return true;
 }
     const WORK_START = 10;
     const WORK_END = 20;
