@@ -1,7 +1,7 @@
 export default function handler(req, res) {
-    // إعدادات آمنة من متغيرات البيئة
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Cache-Control', 'no-store');
+    // المتغيرات السرية تظهر هنا
+    console.log('SUPABASE_URL exists:', !!process.env.SUPABASE_URL);
+    console.log('BOT_TOKEN exists:', !!process.env.BOT_TOKEN);
     
     res.status(200).json({
         SUPABASE_URL: process.env.SUPABASE_URL || '',
