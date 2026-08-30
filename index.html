@@ -1248,10 +1248,29 @@ async function loadConfig() {
         return 'P' + Date.now().toString(36) + Math.random().toString(36).substr(2, 4);
     }
 
-    function isValidWhatsapp(number) {
-        const cleaned = number.replace(/\s/g, '');
-        return /^(09\d{8}|(\+963)\d{9})$/.test(cleaned);
+function isValidWhatsapp(number) {
+    // تنظيف الرقم من المسافات والرموز الزائدة
+    const cleaned = number.replace(/[\s\-\(\)]/g, '');
+    
+    // قبول الأرقام الدولية (+ متبوعاً بـ 10-15 رقم)
+    // أو الأرقام المحلية (10-15 رقم)
+    return /^(\+\d{10,15}|\d{10,15})$/.test(cleaned);
+}
+
+function normalizeWhatsappNumber(number) {
+    let cleaned = number.replace(/[\s\-\(\)]/g, '');
+    
+    // إذا كان الرقم يبدأ بـ 0، نحوله إلى +963
+    if (cleaned.startsWith('0')) {
+        cleaned = '+963' + cleaned.substring(1);
     }
+    // إذا كان الرقم لا يبدأ بـ +، نضيف +
+    else if (!cleaned.startsWith('+')) {
+        cleaned = '+' + cleaned;
+    }
+    
+    return cleaned;
+}
 
     // ============================================================
     // SUPABASE FUNCTIONS
@@ -1392,9 +1411,9 @@ async function loadConfig() {
         
         const whatsappInternational = whatsapp.replace(/^0/, '+963');
         
-        const acceptMessage = `السلام عليكم\nكيف حالك يا ${patientName}\nتم تثبيت موعدك\nيوم ${dateDisplay}\nفي تمام الساعة ${formattedTime}\nنتمنى الالتزام`;
+        const acceptMessage = `السلام عليكم\nكيف حالك آنسة ${patientName}\nتم تثبيت موعدك\nيوم ${dateDisplay}\nفي تمام الساعة ${formattedTime}\nنتمنى الالتزام`;
 
-        const rejectMessage = `السلام عليكم\nكيف حالك يا ${patientName}\nنود اعلامك بأن الموعد الذي قمت بحجزه غير ملائم\nنتمنى أن تقوم بإلغاء الحجز وحجز موعد جديد`;
+        const rejectMessage = `السلام عليكم\nكيف حالك آنسة ${patientName}\nنود اعلامك بأن الموعد الذي قمت بحجزه غير ملائم\nنتمنى أن تقوم بإلغاء الحجز وحجز موعد جديد`;
         
         const acceptUrl = `https://wa.me/${whatsappInternational}?text=${encodeURIComponent(acceptMessage)}`;
         const rejectUrl = `https://wa.me/${whatsappInternational}?text=${encodeURIComponent(rejectMessage)}`;
@@ -1642,9 +1661,8 @@ function setupDaySelector() {
 async function confirmBooking() {
     const confirmBtn = document.getElementById('modalConfirmBtn');
     
-    // التحقق من البيانات أولاً
     const name = document.getElementById('patientNameInput').value.trim();
-    const whatsapp = document.getElementById('whatsappInput').value.trim();
+    let whatsapp = document.getElementById('whatsappInput').value.trim();
     const date = state.selectedDate;
     const time = selectedTimeForBooking;
 
@@ -1653,9 +1671,15 @@ async function confirmBooking() {
         return;
     }
 
+    // تحويل الرقم تلقائياً
+    whatsapp = normalizeWhatsappNumber(whatsapp);
+    
+    // تحديث حقل الإدخال بالرقم المحول
+    document.getElementById('whatsappInput').value = whatsapp;
+
     if (!isValidWhatsapp(whatsapp)) {
         document.getElementById('whatsappInput').classList.add('error');
-        showToast('رقم واتساب غير صحيح. مثال: +9631345678', 'error');
+        showToast('رقم واتساب غير صحيح. مثال: +963134567890', 'error');
         return;
     }
     document.getElementById('whatsappInput').classList.remove('error');
